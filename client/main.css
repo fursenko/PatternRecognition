@@ -18,7 +18,7 @@ body {
 .container {
     height: 80%;
     width: 80%;
-    margin-left: auto !important;
+    margin-left: auto;
     margin-top: 5%;
     margin-right: auto;
     border-left: gray solid 1px;
@@ -30,4 +30,30 @@ line {
     stroke: white;
     stroke-width: 1;
     fill: #515151;
+}
+
+circle.result,
+line.result  {
+    stroke: lightgreen;
+    stroke-width: 1;
+    fill: lightgreen;
+}
+
+.control
+{
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 1%;
+    width: 5%;
+    height: 10%;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.control > button{
+    width: 0.8in;
+    height: 0.3in;
+    margin-top: 30%;
+    margin-left: 15%;
+    border-radius: 0.05in;
 }
