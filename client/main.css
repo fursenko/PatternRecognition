@@ -16,13 +16,13 @@ body {
     position: absolute;
 }
 .container {
-    height: 80%;
-    width: 80%;
-    margin-left: auto;
-    margin-top: 5%;
+    height: 95%;
+    width: 70%;
+    margin-left: 25%;
+    margin-top: 1%;
     margin-right: auto;
-    border-left: gray solid 1px;
-    border-bottom: gray solid 1px;
+    /* border-left: gray solid 1px;
+    border-bottom: gray solid 1px; */
 }
 
 circle,

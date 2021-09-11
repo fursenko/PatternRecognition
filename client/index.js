@@ -56,7 +56,6 @@ function run(dr) {
     Service.run(data).then(function (response) {
         response.json().then(function (data) {
             showResults(dr, data);
-            // console.log(data);
         });
     });
 }
@@ -70,26 +69,6 @@ function showResults(dr, data) {
             dr.line(a.x, a.y, b.x, b.y);
         }
     });
-    // data.forEach(di => {
-    //     // di.data.forEach(el => {
-    //     //     dr.point(el.v.x, el.v.y);
-    //     //     dr.point(el.w.x, el.w.y);
-    //     //     dr.line(el.v.x as number
-    //     //         , el.v.y as number
-    //     //         , el.w.x as number
-    //     //         , el.w.y as number);
-    //     // });
-    //     dr.point(di.data[0].x as number, di.data[0].y as number)
-    //     for (let index = 1; index < di.data.length; index++) {
-    //         const element = di.data[index];
-    //         dr.point(di.data[index].x as number, di.data[index].y as number)
-    //         dr.line(di.data[index - 1].x as number
-    //             , di.data[index - 1].y as number
-    //             , di.data[index].x as number
-    //             , di.data[index].y as number)
-    //     }
-    // });
-    // console.log(data);
 }
 function noise(dr) {
     Service.random(1000, dr.x, dr.y)
