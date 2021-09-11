@@ -2,6 +2,7 @@
 
 namespace Service
 {
+
     public class Point : IComparable<Point>
     {
         public int X { get; set; }
@@ -15,7 +16,19 @@ namespace Service
 
         public int CompareTo(Point other)
         {
-            throw new NotImplementedException();
+            if (Y < other.Y) return -1;
+            else if (Y == other.Y)
+            {
+                if (X < other.X) return -1;
+                else if (X == other.X) return 0;
+                else return 1;
+            }
+            else return 1;
+        }
+
+        public override string ToString()
+        {
+            return $"{X},{Y}";
         }
     }
 }

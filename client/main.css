@@ -57,3 +57,10 @@ line.result  {
     margin-left: 15%;
     border-radius: 0.05in;
 }
+
+line
+{
+    stroke: lightgreen;
+    stroke-width: 2;
+    fill: lightgreen;
+}
