@@ -11,9 +11,7 @@ class Drawer {
         var svg = document.createElementNS(this.ns, 'svg');
         var container = document.getElementById(id);
         this.x = container.clientHeight;
-        // console.log(this.x);
         this.y = container.clientHeight;
-        // console.log(this.y);
         svg.setAttributeNS(null, 'width', `${this.x}px`);
         svg.setAttributeNS(null, 'height', `${this.y}px`);
         svg.setAttributeNS(null, 'viewBox', `0 0 ${this.x} ${this.y}`);
@@ -22,7 +20,7 @@ class Drawer {
     }
 
     point(x: number, y: number, style: string = null) {
-        const r = 5;
+        const r = 3;
         var ce = document.createElementNS(this.ns, 'circle');
         ce.setAttributeNS(null, 'cx', x.toString());
         ce.setAttributeNS(null, 'cy', y.toString());
@@ -51,9 +49,9 @@ class Service {
         return fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json' } });
     }
 
-    public static run(n: number, x: number, y: number, data: Array<{ x: number, y: number }>): Promise<any> {
+    public static run(data: Array<{ x: number, y: number }>): Promise<any> {
         const url = `http://localhost:28846/Point/run`;
-        const request = { n: n, x: x, y: y, data: data };
+        const request = { data: data };
         return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(request) });
     }
 }
@@ -65,10 +63,9 @@ window.onload = () => {
 }
 
 function run(dr: Drawer) {
-    Service.run(100, dr.x, dr.y, data).then((response) => {
+    Service.run(data).then((response) => {
         response.json().then((data) => {
             showResults(dr, data);
-            // console.log(data);
         })
     })
 }
@@ -88,29 +85,6 @@ function showResults(dr: Drawer, data: Array<any>) {
             }
         }
     )
-
-    // data.forEach(di => {
-
-    //     // di.data.forEach(el => {
-    //     //     dr.point(el.v.x, el.v.y);
-    //     //     dr.point(el.w.x, el.w.y);
-    //     //     dr.line(el.v.x as number
-    //     //         , el.v.y as number
-    //     //         , el.w.x as number
-    //     //         , el.w.y as number);
-    //     // });
-    //     dr.point(di.data[0].x as number, di.data[0].y as number)
-    //     for (let index = 1; index < di.data.length; index++) {
-    //         const element = di.data[index];
-    //         dr.point(di.data[index].x as number, di.data[index].y as number)
-    //         dr.line(di.data[index - 1].x as number
-    //             , di.data[index - 1].y as number
-    //             , di.data[index].x as number
-    //             , di.data[index].y as number)
-    //     }
-    // });
-
-    // console.log(data);
 }
 
 function noise(dr: Drawer) {

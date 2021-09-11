@@ -23,16 +23,16 @@ namespace Service.Tests
                 points.Add(point);
             }
             Debug.WriteLine("TEST");
-            var magicBox = new MagicBox(points);
-            var result = magicBox.GetPatterns();
+            //var magicBox = new MagicBox(points);
+            //var result = magicBox.GetPatterns();
 
-            foreach (var pattern in result)
-            {
-                foreach (var point in pattern.Data)
-                {
-                    Debug.WriteLine($"{point.X}, {point.Y}");
-                }
-            }
+            //foreach (var pattern in result)
+            //{
+            //    foreach (var point in pattern.Data)
+            //    {
+            //        Debug.WriteLine($"{point.X}, {point.Y}");
+            //    }
+            //}
 
         }
     }

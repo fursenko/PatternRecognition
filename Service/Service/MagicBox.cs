@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Service
 {
@@ -17,22 +16,15 @@ namespace Service
 
     public class MagicBox
     {
-        private Point[] _points;
-
-        public MagicBox(IEnumerable<Point> points)
-        {
-            _points = points.ToArray();
-            Array.Sort(_points);
-        }
-
-        public IEnumerable<Pattern> GetPatterns()
+        public IEnumerable<Pattern> GetPatterns(IEnumerable<Point> set)
         {
             var patterns = new List<Pattern>();
+            var points = set.ToArray();
 
-            for (int i = 1; i < _points.Length; i++)
+            for (int i = 1; i < points.Length; i++)
             {
-                var origin = _points[i - 1];
-                var res = Calculate(origin, 0, _points);
+                var origin = points[i - 1];
+                var res = Calculate(origin, i, points);
                 patterns.AddRange(res);
             }
 
@@ -50,7 +42,9 @@ namespace Service
             {
                 decimal y = points[i].Y - y0;
                 decimal x = points[i].X - x0;
-                decimal slope = y / ((x == 0) ? (decimal)int.MaxValue : x);
+                decimal slope = 0;
+                if (x == 0) slope = (decimal)int.MaxValue;
+                else slope = y / x;
                 slopes[j] = new decimal[2] { i, slope };
             }
 
@@ -73,7 +67,7 @@ namespace Service
                     var pts = new List<Point>();
 
                     foreach (var item in segment)
-                        pts.Add(_points[(int)item[0]]);
+                        pts.Add(points[(int)item[0]]);
 
                     result.Add(new Pattern(pts));
 

@@ -5,9 +5,7 @@ var Drawer = /** @class */ (function () {
         var svg = document.createElementNS(this.ns, 'svg');
         var container = document.getElementById(id);
         this.x = container.clientHeight;
-        // console.log(this.x);
         this.y = container.clientHeight;
-        // console.log(this.y);
         svg.setAttributeNS(null, 'width', this.x + "px");
         svg.setAttributeNS(null, 'height', this.y + "px");
         svg.setAttributeNS(null, 'viewBox', "0 0 " + this.x + " " + this.y);
@@ -16,7 +14,7 @@ var Drawer = /** @class */ (function () {
     }
     Drawer.prototype.point = function (x, y, style) {
         if (style === void 0) { style = null; }
-        var r = 5;
+        var r = 3;
         var ce = document.createElementNS(this.ns, 'circle');
         ce.setAttributeNS(null, 'cx', x.toString());
         ce.setAttributeNS(null, 'cy', y.toString());
@@ -42,9 +40,9 @@ var Service = /** @class */ (function () {
         var url = "http://localhost:28846/Point/random?n=" + n + "&x=" + x + "&y=" + y;
         return fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json' } });
     };
-    Service.run = function (n, x, y, data) {
+    Service.run = function (data) {
         var url = "http://localhost:28846/Point/run";
-        var request = { n: n, x: x, y: y, data: data };
+        var request = { data: data };
         return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(request) });
     };
     return Service;
@@ -55,7 +53,7 @@ window.onload = function () {
     document.getElementById('run').addEventListener('click', function () { run(dr); });
 };
 function run(dr) {
-    Service.run(100, dr.x, dr.y, data).then(function (response) {
+    Service.run(data).then(function (response) {
         response.json().then(function (data) {
             showResults(dr, data);
             // console.log(data);
