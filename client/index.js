@@ -64,7 +64,7 @@ function showResults(dr, data) {
         for (var i = 1; i < di.data.length; i++) {
             var a = di.data[i - 1];
             var b = di.data[i];
-            dr.point(a.x, a.y);
+            dr.point(a.x, a.y, 'result');
             dr.point(b.x, b.y);
             dr.line(a.x, a.y, b.x, b.y);
         }

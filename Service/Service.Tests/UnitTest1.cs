@@ -1,7 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
+using JetBrains.dotMemoryUnit;
 
 namespace Service.Tests
 {
@@ -9,30 +11,39 @@ namespace Service.Tests
     public class MainTest
     {
         [TestMethod]
-        public void TestMethod1()
+        [DotMemoryUnit(CollectAllocations = true)]
+        public void GetPatternsTest_1K()
         {
-            /*
-             *19000,10000;18000,10000;32000,10000;21000,10000;1234,5678;14000,10000
-             */
-            var points = new List<Point>();
-            var data = "19000,10000;18000,10000;32000,10000;21000,10000;1234,5678;14000,10000".Split(';');
-            for (int i = 0; i < data.Length; i++)
-            {
-                var cell = data[i].Split(',');
-                var point = new Point(Convert.ToInt32(cell[0]), Convert.ToInt32(cell[1]));
-                points.Add(point);
-            }
-            Debug.WriteLine("TEST");
-            //var magicBox = new MagicBox(points);
-            //var result = magicBox.GetPatterns();
+            var list = new List<Point>();
+            var random = new Random();
+            for (int i = 0; i < 1000; i++)
+                list.Add(new Point(random.Next(1, 1000), random.Next(1, 1000)));
 
-            //foreach (var pattern in result)
-            //{
-            //    foreach (var point in pattern.Data)
-            //    {
-            //        Debug.WriteLine($"{point.X}, {point.Y}");
-            //    }
-            //}
+            var ts = new Stopwatch();
+            ts.Start();
+            var mb = new MagicBox();
+            var result = mb.GetPatterns(list);
+            ts.Stop();
+            Assert.IsTrue(result != null && result.Any());
+            Debug.WriteLine(ts.ElapsedMilliseconds);
+        }
+
+        [TestMethod]
+        [DotMemoryUnit(CollectAllocations = true)]
+        public void GetPatternsTest_10K()
+        {
+            var list = new List<Point>();
+            var random = new Random();
+            for (int i = 0; i < 10000; i++)
+                list.Add(new Point(random.Next(1, 1000), random.Next(1, 1000)));
+
+            var ts = new Stopwatch();
+            ts.Start();
+            var mb = new MagicBox();
+            var result = mb.GetPatterns(list);
+            ts.Stop();
+            Assert.IsTrue(result != null && result.Any());
+            Debug.WriteLine(ts.ElapsedMilliseconds);
 
         }
     }

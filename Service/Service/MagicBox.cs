@@ -63,12 +63,9 @@ namespace Service
                         continue;
                     }
 
-                    var segment = new ArraySegment<decimal[]>(slopes, i - ci, ci);
-                    var pts = new List<Point>();
-
-                    foreach (var item in segment)
-                        pts.Add(points[(int)item[0]]);
-
+                    var pts = new ArraySegment<decimal[]>(slopes, i - ci, ci)
+                        .Select(_ => points[(int)_[0]]);
+                    pts.Append(origin);
                     result.Add(new Pattern(pts));
 
                     ci = 1;

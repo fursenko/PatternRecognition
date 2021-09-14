@@ -76,7 +76,7 @@ function showResults(dr: Drawer, data: Array<any>) {
             for (let i = 1; i < di.data.length; i++) {
                 const a = di.data[i - 1];
                 const b = di.data[i];
-                dr.point(a.x as number, a.y as number)
+                dr.point(a.x as number, a.y as number, 'result')
                 dr.point(b.x as number, b.y as number)
                 dr.line(a.x as number
                     , a.y as number
